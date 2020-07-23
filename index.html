@@ -80,11 +80,87 @@
    </section>
 
    <script>
+      //minus-button er khela...
+      const minMobile = document.getElementById("mobile-minus");
+      minMobile.addEventListener('click', function(){
+         const mNum = parseInt(document.getElementById('mobile-number').value);
+         const cNum = parseInt(document.getElementById('case-number').value);
+         if(mNum>-1 == false && cNum>-1 == false){
+            alert("Please enter your valid mobile && case number...");
+            setValue();
+         }
+         else if(mNum>1 == false){
+            alert("Sorry!!! you have to buy at least 1 mobile...")
+            setValue();
+         }else{
+            const addMobile_Number = document.getElementById('mobile-number');
+            const addCost = document.getElementById('mobile-cost');
+            if(checkOut("mobile-number",'mobile-cost','case-number','case-cost')){
+               minNum_Cost('mobile-number','mobile-cost','case-number','case-cost',1219,59);
+            }
+         }
+      });
+      const minCase = document.getElementById('case-minus');
+      minCase.addEventListener('click', function(){
+         const cNum = parseInt(document.getElementById('case-number').value);
+         const mNum = parseInt(document.getElementById('mobile-number').value);
+         if(mNum>-1 == false && cNum>-1 == false){
+            alert("Please enter your valid mobile && case number...");
+            setValue();
+         }else if(cNum>1 == false){
+            alert("Sorry!!! you have to buy at least 1 case...")
+            setValue();
+         }else{
+            const addMobile_Number = document.getElementById('mobile-number');
+            const addCost = document.getElementById('mobile-cost');
+            if(checkOut("mobile-number",'mobile-cost','case-number','case-cost')){
+               minNum_Cost('case-number','case-cost','mobile-number','mobile-cost',59,1219);
+            }
+         }
+      });
+
+      function minNum_Cost(realNumber,realCost,fakeNumber,fakeCost,rC,fC){
+         let n = parseInt(document.getElementById(realNumber).value);
+         let c = parseInt(document.getElementById(realCost).innerText);
+         n -= 1;
+         c = n*rC;//num=1219 or 59
+         //update numbers of mobile and cost 
+         document.getElementById(realNumber).value = n;
+         document.getElementById(realCost).innerText = c;
+         const subTotal = document.getElementById('sub-total');
+         //console.log(subTotal);
+         const tx = document.getElementById('tax');
+         const total = document.getElementById('total');
+         let subCost = parseInt(subTotal.innerHTML);
+         let tax = parseInt(tx.innerText);
+         let totalCost = parseInt(total.innerHTML);
+         //console.log(subCost);
+         subCost = n*rC;
+         tax = n*1;
+         totalCost = subCost + tax;
+         // console.log({totalCost});
+         subTotal.innerText = subCost;
+         tx.innerHTML = tax;
+         total.innerText = totalCost;
+         //case number, cost & tax adding...
+         let Nf = parseInt(document.getElementById(fakeNumber).value);
+         let Cf = document.getElementById(fakeCost);
+         let Tf = Nf*1;   
+         subCost += (Nf*fC);
+         totalCost += (Nf*fC)+Tf;
+         // console.log({totalCost});
+         tax += Tf;
+         //update payable amount...
+         Cf.innerText = Nf*fC;
+         subTotal.innerText = subCost;
+         tx.innerHTML = tax;
+         total.innerText = totalCost;
+      }
+      //plus-button er khela...
       const addMobile = document.getElementById('mobile-plus');
       addMobile.addEventListener('click', function(){
          const addMobile_Number = document.getElementById('mobile-number');
          const addCost = document.getElementById('mobile-cost');
-         let num = parseInt(addMobile_Number.value);
          if(checkOut("mobile-number",'mobile-cost','case-number','case-cost')){
             addNum_Cost('mobile-number','mobile-cost','case-number','case-cost',1219,59);
          }
@@ -137,24 +213,32 @@
       function checkOut(mNum,mCost,cNum,cCost){
          let cN = parseInt(document.getElementById(cNum).value);
          let mN = parseInt(document.getElementById(mNum).value);
-         let cC = document.getElementById(cCost);
-         let mC = document.getElementById(mCost);
          try{
             if(cN>0 == false || mN>0 == false){
                throw Error;
             }
          }catch(err){
             alert("please enter your valid mobile && case number");
-            document.getElementById(cNum).value = "1";
-            document.getElementById(mNum).value = "1";
-            cC.innerText = "59";
-            mC.innerHTML = "1219";
-            document.getElementById("sub-total").innerText = "1278";
-            document.getElementById("tax").innerText = "2";
-            document.getElementById("total").innerText = "1280";
+            // let cC = document.getElementById(cCost);
+            // let mC = document.getElementById(mCost);
+            // document.getElementById(cNum).value = "1";
+            // document.getElementById(mNum).value = "1";
+            // cC.innerText = "59";
+            // mC.innerHTML = "1219";
+         // Just call dilam r ki...
+            setValue();
             return false;
          }
          return true;
+      }
+      function setValue(){
+         document.getElementById('mobile-number').value = "1";
+         document.getElementById('mobile-cost').innerHTML = "1219";
+         document.getElementById('case-number').value = "1";
+         document.getElementById('case-cost').innerHTML = "59";
+         document.getElementById("sub-total").innerText = "1278";
+         document.getElementById("tax").innerText = "2";
+         document.getElementById("total").innerText = "1280";
       }
    </script>
 </body>
