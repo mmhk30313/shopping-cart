@@ -77,8 +77,8 @@ body{
 	transition: 0.5s;
 }
 .memo{
-	background-image: linear-gradient(to right,  rgb(196, 34, 101), goldenrod);
-	color: white;
+	background-image: linear-gradient(to right,  rgb(196, 34, 101), goldenrod) !important;
+	color: white !important;
 	box-shadow: 3px 3px 7px grey;
 	/* padding: 150px;*/
 	padding: 50px 50px;
