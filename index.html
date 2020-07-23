@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-6 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-6 center-item">
+                        
+                        <div class="input-group number-spinner">
+                           <button id="mobile-minus" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="mobile-number" type="text" class="form-control text-center" value="1">
+                           <button id="mobile-plus" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$<span id="mobile-cost">1219</span></h5>
+                        <img id="mobile-cross" src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-6 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-6 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="case-minus" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-number" type="text" class="form-control text-center" value="1">
+                           <button id="case-plus" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="case-cost">59</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$<span id="sub-total">1278</span></h5>
+                        <h5>$<span id="tax">2</span></h5>
+                        <h5>$<span id="total">1280</span></h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <script>
+      const addMobile = document.getElementById('mobile-plus');
+      addMobile.addEventListener('click', function(){
+         const addMobile_Number = document.getElementById('mobile-number');
+         const addCost = document.getElementById('mobile-cost');
+         let num = parseInt(addMobile_Number.value);
+         if(checkOut("mobile-number",'mobile-cost','case-number','case-cost')){
+            addNum_Cost('mobile-number','mobile-cost','case-number','case-cost',1219,59);
+         }
+      });
+      const addCase = document.getElementById("case-plus");
+      addCase.addEventListener('click', function(){
+         const addCase_Number = document.getElementById('case-number');
+         const addCost = document.getElementById('case-cost');
+         if(checkOut("mobile-number",'mobile-cost','case-number','case-cost')){
+            addNum_Cost('case-number','case-cost','mobile-number','mobile-cost',59,1219);
+         }
+      });
+      function addNum_Cost(realNumber,realCost,fakeNumber,fakeCost,rC,fC){
+         let n = parseInt(document.getElementById(realNumber).value);
+         let c = parseInt(document.getElementById(realCost).innerText);
+         n += 1;
+         c = n*rC;//num=1219 or 59
+         //update numbers of mobile and cost 
+         document.getElementById(realNumber).value = n;
+         document.getElementById(realCost).innerText = c;
+         const subTotal = document.getElementById('sub-total');
+         //console.log(subTotal);
+         const tx = document.getElementById('tax');
+         const total = document.getElementById('total');
+         let subCost = parseInt(subTotal.innerHTML);
+         let tax = parseInt(tx.innerText);
+         let totalCost = parseInt(total.innerHTML);
+         //console.log(subCost);
+         subCost = n*rC;
+         tax = n*1;
+         totalCost = subCost + tax;
+         // console.log({totalCost});
+         subTotal.innerText = subCost;
+         tx.innerHTML = tax;
+         total.innerText = totalCost;
+         //case number, cost & tax adding...
+         let Nf = parseInt(document.getElementById(fakeNumber).value);
+         let Cf = document.getElementById(fakeCost);
+         let Tf = Nf*1;   
+         subCost += (Nf*fC);
+         totalCost += (Nf*fC)+Tf;
+         // console.log({totalCost});
+         tax += Tf;
+         //update payable amount...
+         Cf.innerText = Nf*fC;
+         subTotal.innerText = subCost;
+         tx.innerHTML = tax;
+         total.innerText = totalCost;
+      }
+      function checkOut(mNum,mCost,cNum,cCost){
+         let cN = parseInt(document.getElementById(cNum).value);
+         let mN = parseInt(document.getElementById(mNum).value);
+         let cC = document.getElementById(cCost);
+         let mC = document.getElementById(mCost);
+         try{
+            if(cN>0 == false || mN>0 == false){
+               throw Error;
+            }
+         }catch(err){
+            alert("please enter your valid mobile && case number");
+            document.getElementById(cNum).value = "1";
+            document.getElementById(mNum).value = "1";
+            cC.innerText = "59";
+            mC.innerHTML = "1219";
+            document.getElementById("sub-total").innerText = "1278";
+            document.getElementById("tax").innerText = "2";
+            document.getElementById("total").innerText = "1280";
+            return false;
+         }
+         return true;
+      }
+   </script>
+</body>
+
+</html>

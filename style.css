@@ -1,0 +1,78 @@
+body{
+	background: #fff;
+}
+.cart{
+	margin: 100px 0;
+	background-color: #F6F5FA;;
+	padding: 60px 0;
+}
+.total-price{
+	padding-bottom: 15px;
+}
+.cart-item{
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 15px 20px;
+	margin-bottom: 20px;
+}
+.center-item{
+    display: flex;
+    align-items: center;
+	justify-content: flex-start;
+	/* Eta kaj shes hole vanish kore dite hobe */
+	border: 2px solid green;
+	/* margin: 15px; */
+}
+.cart-item img{
+	width: 110px;
+	transition-delay: 0.05s;
+	transition-duration: 0.4s;
+}
+.cart-item img:hover{
+	transform: scale(1.2);
+	transition: transform 0.5s;
+}
+.cart-item h5{
+    padding: 0 45px;
+}
+.cart-item .remove-item{
+	width: 20px!important;
+}
+.btn-default{
+	background-color: #fff;
+}
+.cart-item .form-control{
+	background-color: #F6F5FA;
+	border: none;
+    width: 50px;
+    border-radius: 10px!important;
+    font-weight: 700;
+	font-size: 20px;
+	position: static;
+	padding: 0px;
+	margin: 6px;
+}
+.input-group{
+	width: unset;
+}
+.status{
+	text-align: right;
+}
+.check-out{
+    float: right;
+    padding: 10px 30px;
+	font-size: 19px;
+	background-color: #2FBE70;
+	border: none;
+}
+.remove-item{
+	margin-bottom: 7px;
+	cursor: pointer;
+	/* margin-right: 5px; */
+	transition-delay: 0.05s;
+	transition-duration: 0.4s;
+}
+.remove-item:hover{
+	transform: scale(1.1);
+	transition: 0.5s;
+}
