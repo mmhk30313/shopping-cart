@@ -77,7 +77,7 @@ body{
 	transition: 0.5s;
 }
 .memo{
-	background-image: linear-gradient(to right,  rgb(196, 34, 101), goldenrod) !important;
+	background-image: linear-gradient(to right,  rgb(196, 34, 101), rgb(106, 32, 218)) !important;
 	color: white !important;
 	box-shadow: 3px 3px 7px grey;
 	border-radius: 15px;
@@ -91,11 +91,10 @@ body{
 	transition-duration: 0.8s;
 }
 .memo:hover{
-	transform: scale(1.05);
-	transition: transform 1s;
+	transform: scale(1.03);
+	transition: transform 1.5s;
 }
 .back{
-	
 	padding-top: 30px;
 }
 #second, #third{
