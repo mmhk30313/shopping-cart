@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <!-- <img src=""/> -->
+   <link rel="shortcut icon" href="https://img.icons8.com/plasticine/100/000000/mobile-order.png" type="image/x-icon">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="practiceCss.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section id="first">
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div id="mobile" class="cart-item">
+                  <div class="row">
+                     <div class="col-md-6 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-6 center-item">    
+                        <div class="input-group -spinner">
+                           <button id="minus1" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="number1" oninput="mobileUpdate()" type="text" class="form-control text-center" value="1">
+                           <button id="plus1" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$<span id="cost1">1,219</span></h5>
+                        <img id="cross1" src="images/remove.png"class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div id="case" class="cart-item">
+                  <div class="row">
+                     <div class="col-md-6 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-6 center-item">
+                        <div class="input-group -spinner">
+                           <button id="minus2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="number2" oninput="caseUpdate()" type="text" class="form-control text-center" value="1">
+                           <button id="plus2" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="cost2">59</span></h5>
+                        <img id="cross2" src="images/remove.png"class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$<span id="sub-total">1,278</span></h5>
+                        <h5>$<span id="tax">2</span></h5>
+                        <h5>$<span id="total">1,280</span></h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="d-flex bd-highlight mb-3">
+                    <div class="pt-4 pb-4 mr-auto p-2 bd-highlight">
+                        <button type="button" onclick="resetAll()" class="btn btn-success check-out" title="Are you sure to reset everything...???">Re-setting</button>
+                    </div>
+                    <div class="pt-4 pb-4 p-2 bd-highlight">
+                        <button type="button" onclick="checkAll()" class="btn btn-success check-out" title="Are you sure to check it out...???">Check Out</button>
+                    </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section id="second" class="container memo text-center">
+         <h3>Per Mobile = $1,219</h3>
+         <h3>Per Mobile Case = $59</h3>
+         <h3>Number of Mobile = <span id="m1">1</span></h3>
+         <h3>Number of Case = <span id="m2">1</span></h3>
+         <h3>Subtotal = $<span id="m3">1,278</span></h3>
+         <h3>Tax = $<span id="m4">2</span></h3>
+         <h3>Total = $<span id="m5">1,280</span></h3>
+   </section>
+   <section id="third" class="container">
+      <div class="back text-right">
+         <button onclick="back()" type="button" class="btn btn-success"><small style="color: white">BACK</small></button>
+     </div>
+   </section>
+   
+   <script>
+       const mobileNumber = document.getElementById('number1');//.value
+       const caseNumber = document.getElementById('number2');//.value
+       const mobileCost = document.getElementById('cost1');//.innerHTML
+       const caseCost = document.getElementById('cost2');//.innerText
+       const subTotal = document.getElementById('sub-total');//.innerText
+       const tax = document.getElementById('tax');//.innerText
+       const total = document.getElementById('total');//.inputHTML
+       const Mobile = document.getElementById('mobile');//style.display = 'block' / 'none'
+       const Case = document.getElementById('case');//style.display = 'block' / 'none'
+       let ck = true;
+       // Back...
+        function back(){
+            document.getElementById("second").style.display = "none";
+            document.getElementById("third").style.display = "none";
+            document.getElementById("first").style.display = "block";
+        }
+       //Re-setting...all value...
+       function resetAll(){
+           mobileNumber.value = "1".toLocaleString('en-IN');
+           caseNumber.value = '1'.toLocaleString('en-IN');
+           mobileCost.innerHTML = '1219'.toLocaleString('en-IN');
+           caseCost.innerHTML = '59'.toLocaleString('en-IN');
+           subTotal.innerText = '1278'.toLocaleString('en-IN');
+           tax.innerText = '2'.toLocaleString('en-IN');
+           total.innerHTML = "1280".toLocaleString('en-IN');
+           Mobile.style.display = 'block';
+           Case.style.display = 'block';
+       }
+       //check-out...
+       function checkAll(){
+            if(parseInt(document.getElementById('number1').value)>-1 == false || parseInt(document.getElementById('number2').value)>-1 == false){
+                alert("please enter your valid number of mobile && case ");
+                resetAll();
+            }else{
+                let M = parseInt(mobileNumber.value.replace(/[^0-9]/g, ''));
+                let C = parseInt(caseNumber.value.replace(/[^0-9]/g, ''));
+                let Sub_Total = parseInt(subTotal.innerText.replace(/[^0-9]/g, ''));
+                let Tax = parseInt(tax.innerText.replace(/[^0-9]/g, ''));
+                let Total = parseInt(total.innerText.replace(/[^0-9]/g, ''));
+                console.log(M,C,Sub_Total,Tax,Total);
+                document.getElementById('m1').innerText = M.toLocaleString('en-IN');
+                document.getElementById('m2').innerText = C.toLocaleString('en-IN');
+                document.getElementById('m3').innerText = Sub_Total.toLocaleString('en-IN');
+                document.getElementById('m4').innerText = Tax.toLocaleString('en-IN');
+                document.getElementById('m5').innerText = Total.toLocaleString('en-IN');
+                resetAll();
+                document.getElementById('first').style.display = 'none';
+                document.getElementById('second').style.display = 'block';
+                document.getElementById('third').style.display = 'block';
+            }
+       }
+       //cross1...
+       const crossMobile = document.getElementById('cross1');
+       crossMobile.addEventListener('click', function(){
+        //checkAll();    
+        Mobile.style.display = 'none';
+       });
+       //cross2...
+       const crossCase = document.getElementById('cross2');
+       crossCase.addEventListener('click', function(){
+            //checkAll()    
+            Case.style.display = 'none';
+       });
+       //minus1...button...
+       const minMobile = document.getElementById('minus1');
+       minMobile.addEventListener('click', function(){
+           let mN = new Number(parseInt(mobileNumber.value.replace(/[^0-9]/g, '')));
+           let cN = new Number(parseInt(caseNumber.value.replace(/[^0-9]/g, '')));
+           ck = false;
+           updateInput(mN-1,cN,ck);
+        });
+        //minus2...button...
+       const minCase = document.getElementById('minus2');
+       minCase.addEventListener('click', function(){
+            let mN = new Number(parseInt(mobileNumber.value.replace(/[^0-9]/g, '')));
+            let cN = new Number(parseInt(caseNumber.value.replace(/[^0-9]/g, '')));
+            ck = false;
+            updateInput(mN,cN-1,ck);
+       });
+       //plus1...button...
+       const addMobile = document.getElementById('plus1');
+       addMobile.addEventListener('click', function(){
+            let mN = new Number(parseInt(mobileNumber.value.replace(/[^0-9]/g, '')));
+            let cN = new Number(parseInt(caseNumber.value.replace(/[^0-9]/g, '')));
+            ck=true;
+            updateInput(mN+1,cN,ck);
+       });
+
+       //plus2...button...
+       const addCase = document.getElementById('plus2');
+       addCase.addEventListener('click', function(){
+            let mN = new Number(parseInt(mobileNumber.value.replace(/[^0-9]/g, '')));
+            let cN = new Number(parseInt(caseNumber.value.replace(/[^0-9]/g, '')));
+            ck=true;
+            updateInput(mN,cN+1,ck);
+       });
+
+       function mobileUpdate(){
+        //    let cC = new Number(parseInt(caseCost.innerText.replace(/[^0-9]/g, ''))).toLocaleString('en-IN');
+        //    let sT = new Number(parseInt(subTotal.innerText.replace(/[^0-9]/g, ''))).toLocaleString('en-IN');
+        //    let tx = new Number(parseInt(tax.innerText.replace(/[^0-9]/g, ''))).toLocaleString('en-IN');
+        //    let tT = new Number(parseInt(total.innerText.replace(/[^0-9]/g, ''))).toLocaleString('en-IN');
+           let mN = new Number(parseInt(mobileNumber.value.replace(/[^0-9]/g, '')));
+           let cN = new Number(parseInt(caseNumber.value.replace(/[^0-9]/g, '')));
+           ck=true;
+           updateInput(mN,cN,ck);
+           
+        //    console.log(mN,mC,cN,cC,sT,tx,tT);
+       }
+       function caseUpdate(){
+            let mN = new Number(parseInt(mobileNumber.value.replace(/[^0-9]/g, '')));
+            let cN = new Number(parseInt(caseNumber.value.replace(/[^0-9]/g, '')));
+            updateInput(mN,cN,ck);
+       }
+       function updateInput(mN, cN, ck){
+            // console.log(mN);
+            if(ck==false && mN==0){
+                mobileNumber.value = mN.toLocaleString('en-IN');
+            }
+            if(ck==false && cN==0){
+                caseNumber.value = cN.toLocaleString('en-IN');
+            }
+            if(mobileNumber.value==''){
+                mobileNumber.value = '';
+                mN = 0;
+            }
+            if(caseNumber.value==''){
+                caseNumber.value = '';
+                cN = 0;
+            }
+            if(mN>-1 == false){
+                alert('Please enter your valid quantity!!!');
+                mobileNumber.value = "";
+                mN=0;
+            }
+            if(cN>-1 == false){
+                alert('Please enter your valid quantity!!!');
+                caseNumber.value = "";
+                cN=0;
+            }
+            if(mN!=0){
+                mobileNumber.value = mN.toLocaleString('en-IN');
+            }
+            if(cN!=0){
+                caseNumber.value = cN.toLocaleString('en-IN');
+            }
+            mobileCost.innerHTML = (mN*1219).toLocaleString('en-IN');
+            caseCost.innerHTML = (cN*59).toLocaleString('en-IN');
+            //let mC = new Number(parseInt(mobileCost.innerHTML.replace(/[^0-9]/g, '')));
+            subTotal.innerHTML = ((mN*1219)+(cN*59)).toLocaleString('en-IN');
+            tax.innerHTML = (cN+mN).toLocaleString('en-IN');
+            total.innerHTML = ((mN*1219)+(cN*59)+(cN+mN)).toLocaleString('en-IN');
+       }
+   </script>
+</body>
+
+</html>

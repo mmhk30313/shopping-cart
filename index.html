@@ -296,7 +296,7 @@
       //correctionAll button handler...
       function checkAll(){
          if(parseInt(document.getElementById('mobile-number').value)>0 == false || parseInt(document.getElementById('case-number').value)>0 == false){
-            alert("please enter your valid mobile && case number");
+            alert("please enter your valid mobile && case ");
             setValue();
          }else{
             let m = parseInt(document.getElementById('mobile-number').value);
@@ -316,7 +316,7 @@
          }
       }
       function setValue(){
-         document.getElementById('mobile-number').value = "1";
+         document.getElementById('mobile-number').value = '1';
          document.getElementById('mobile-cost').innerHTML = "1219";
          document.getElementById('case-number').value = "1";
          document.getElementById('case-cost').innerHTML = "59";
