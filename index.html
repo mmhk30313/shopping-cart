@@ -80,13 +80,13 @@
       </div>
    </section>
    <section id="second" class="container memo text-center">
-         <h3>Per Mobile = $1219</h3>
+         <h3>Per Mobile = $1,219</h3>
          <h3>Per Mobile Case = $59</h3>
          <h3>Number of Mobile = <span id="m1">1</span></h3>
          <h3>Number of Case = <span id="m2">1</span></h3>
-         <h3>Subtotal = $<span id="m3">1278</span></h3>
+         <h3>Subtotal = $<span id="m3">1,278</span></h3>
          <h3>Tax = $<span id="m4">2</span></h3>
-         <h3>Total = $<span id="m5">1280</span></h3>
+         <h3>Total = $<span id="m5">1,280</span></h3>
    </section>
    <section id="third" class="container">
       <div class="back text-right">
@@ -304,11 +304,11 @@
             let subTotal = parseInt(document.getElementById('sub-total').innerText);
             let tax = parseInt(document.getElementById('tax').innerText);
             let total = parseInt(document.getElementById('total').innerText);
-            document.getElementById('m1').innerText = m;
-            document.getElementById('m2').innerText = c;
-            document.getElementById('m3').innerText = subTotal;
-            document.getElementById('m4').innerText = tax;
-            document.getElementById('m5').innerText = total;
+            document.getElementById('m1').innerText = m.toLocaleString('en-IN');
+            document.getElementById('m2').innerText = c.toLocaleString('en-IN');
+            document.getElementById('m3').innerText = subTotal.toLocaleString('en-IN');
+            document.getElementById('m4').innerText = tax.toLocaleString('en-IN');
+            document.getElementById('m5').innerText = total.toLocaleString('en-IN');
             setValue();
             document.getElementById('first').style.display = 'none';
             document.getElementById('second').style.display = 'block';
