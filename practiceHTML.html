@@ -55,6 +55,19 @@
                      </div>
                   </div>
                </div>
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-6"><h5>Do you have a coupon? Get 15% discount!</h5></div>
+                     <div class="col-md-6 row">
+                        <div class="col-md-9">
+                           <input id="coupon" class="form-control text-center" placeholder="Coupon: we-are-p-hero" value="we-are-p-hero">
+                        </div>
+                        <div class="col-md-3">
+                           <button type="button" onclick="savingApply()" class="btn btn-warning" title="Are you sure to save your money...?">APPLY</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
 
                <div class="cart-item">
                   <div class="row">
@@ -62,19 +75,21 @@
                      <div class="col-md-8">
                         <h5>Subtotal: </h5>
                         <h5>Tax:</h5>
+                        <h5 id="apply1">Saving:</h5>
                         <h5>Total:</h5>
                      </div>
 
                      <div class="col-md-4 status">
                         <h5>$<span id="sub-total">1,278</span></h5>
                         <h5>$<span id="tax">2</span></h5>
+                        <h5 id="apply2">$0</span></h5>
                         <h5>$<span id="total">1,280</span></h5>
                      </div>
                   </div>
                </div>
                <div class="d-flex bd-highlight mb-3">
                     <div class="pt-4 pb-4 mr-auto p-2 bd-highlight">
-                        <button type="button" onclick="resetAll()" class="btn btn-success check-out" title="Are you sure to reset everything...???">Re-setting</button>
+                        <button type="button" onclick="resetAll()" class="btn btn-primary" title="Are you sure to reset everything...???">Re-setting</button>
                     </div>
                     <div class="pt-4 pb-4 p-2 bd-highlight">
                         <button type="button" onclick="checkAll()" class="btn btn-success check-out" title="Are you sure to check it out...???">Check Out</button>
@@ -84,19 +99,27 @@
          </div>
       </div>
    </section>
-   <section id="second" class="container memo text-center">
-         <h3>Per Mobile = $1,219</h3>
-         <h3>Per Mobile Case = $59</h3>
-         <h3>Number of Mobile = <span id="m1">1</span></h3>
-         <h3>Number of Case = <span id="m2">1</span></h3>
-         <h3>Subtotal = $<span id="m3">1,278</span></h3>
-         <h3>Tax = $<span id="m4">2</span></h3>
-         <h3>Total = $<span id="m5">1,280</span></h3>
-   </section>
-   <section id="third" class="container">
-      <div class="back text-right">
-         <button onclick="back()" type="button" class="btn btn-success"><small style="color: white">BACK</small></button>
-     </div>
+   <section id="other-page">
+      <div id="second" class="container memo text-center">
+         <h1>Thank You!!!</h1>
+         <h3>Your order has been confirm.</h3>
+         <br>
+         <h4>Order id: m2ah<span id="order-id">458470</span>ad3e@</h4>
+         <h6>Per Mobile: $1,219</h6>
+         <h6>Per Mobile Case: $59</h6>
+         <h6>Number of Mobile: <span id="m1">1</span></h6>
+         <h6>Number of Case: <span id="m2">1</span></h6>
+         <h6>Subtotal: $<span id="m3">1,278</span></h6>
+         <h6>Tax: $<span id="m4">2</span></h6>
+         <h6>Saving: $<span id="m5">0</span></h6>
+         <h3>Total: $<span id="m6">1,088</span></h3>
+         <!-- kaj korte hobe id="m5" id="m6"... -->
+      </div>
+      <div id="third" class="container">
+         <div class="back text-center">
+            <button onclick="back()" type="button" class="btn btn-success" style="width: 500px !important"><small style="color: white">BACK</small></button>
+      </div>
+      </div>
    </section>
    
    <script>
@@ -106,18 +129,43 @@
        const caseCost = document.getElementById('cost2');//.innerText
        const subTotal = document.getElementById('sub-total');//.innerText
        const tax = document.getElementById('tax');//.innerText
-       const total = document.getElementById('total');//.inputHTML
+       const total = document.getElementById('total');//.innerHTML
        const Mobile = document.getElementById('mobile');//style.display = 'block' / 'none'
        const Case = document.getElementById('case');//style.display = 'block' / 'none'
+       const saving = document.getElementById('apply2');//.innerText
        let ck = true;
+       let apply = false;
+       let s = 0.15;
+       let TT = 0;
+       
+       //Apply Button...Coupon...Saving-->Handler...
+       function savingApply(){
+          if(document.getElementById('coupon').value != "we-are-p-hero"){
+             alert("Invalid coupon, please use this coupon: we-are-p-hero");
+          }else{
+             apply = true;
+             TT = parseFloat(total.innerHTML.replace(/[^0-9]/g, ""));
+             saving.innerHTML = "$" + Math.round(TT*0.15).toLocaleString('en-IN');
+             TT -= Math.round(TT*0.15);
+             total.innerHTML = TT.toLocaleString('en-IN');
+             document.getElementById('apply1').style.display = 'block';
+             document.getElementById('apply2').style.display = 'block';
+            //  document.getElementById('saving').style.display = 'block';
+          }
+       }
        // Back...
         function back(){
+            apply = false;
+            document.getElementById('apply1').style.display = 'none';
+            document.getElementById('apply2').style.display = 'none';
+            document.getElementById('other-page').style.display = 'none';
             document.getElementById("second").style.display = "none";
             document.getElementById("third").style.display = "none";
             document.getElementById("first").style.display = "block";
         }
        //Re-setting...all value...
        function resetAll(){
+           apply = false;
            mobileNumber.value = parseInt("1").toLocaleString('en-IN');
            caseNumber.value = parseInt('1').toLocaleString('en-IN');
            mobileCost.innerHTML = parseInt('1219').toLocaleString('en-IN');
@@ -127,6 +175,8 @@
            total.innerHTML = parseInt("1280").toLocaleString('en-IN');
            Mobile.style.display = 'block';
            Case.style.display = 'block';
+           document.getElementById('apply1').style.display = 'none';
+           document.getElementById('apply2').style.display = 'none';
        }
        //check-out...
        function checkAll(){
@@ -139,14 +189,22 @@
                 let Sub_Total = parseInt(subTotal.innerText.replace(/[^0-9]/g, ''));
                 let Tax = parseInt(tax.innerText.replace(/[^0-9]/g, ''));
                 let Total = parseInt(total.innerText.replace(/[^0-9]/g, ''));
+               //  console.log({Total});
                //  console.log(M,C,Sub_Total,Tax,Total);
                 document.getElementById('m1').innerText = M.toLocaleString('en-IN');
                 document.getElementById('m2').innerText = C.toLocaleString('en-IN');
                 document.getElementById('m3').innerText = Sub_Total.toLocaleString('en-IN');
                 document.getElementById('m4').innerText = Tax.toLocaleString('en-IN');
-                document.getElementById('m5').innerText = Total.toLocaleString('en-IN');
+               //  console.log({apply});
+                if(apply){
+                  document.getElementById('m5').innerText = Math.round(parseFloat(saving.innerHTML.replace(/[^0-9]/g, ""))).toLocaleString('en-IN');
+                }else{
+                   document.getElementById('m5').innerHTML = "0";
+                }
+                document.getElementById('m6').innerText = Total.toLocaleString('en-IN');
                 resetAll();
                 document.getElementById('first').style.display = 'none';
+                document.getElementById('other-page').style.display = 'block';
                 document.getElementById('second').style.display = 'block';
                 document.getElementById('third').style.display = 'block';
             }
@@ -258,6 +316,12 @@
             subTotal.innerHTML = ((mN*1219)+(cN*59)).toLocaleString('en-IN');
             tax.innerHTML = (cN+mN).toLocaleString('en-IN');
             total.innerHTML = ((mN*1219)+(cN*59)+(cN+mN)).toLocaleString('en-IN');
+            if(apply){
+               TT = parseFloat(total.innerHTML.replace(/[^0-9]/g, ""));
+               saving.innerHTML = "$" + Math.round(TT*0.15).toLocaleString('en-IN');
+               TT -= Math.round(TT*0.15);
+               total.innerHTML = TT.toLocaleString('en-IN');
+            }
        }
    </script>
 </body>
