@@ -22,7 +22,7 @@
                   <div class="row">
                      <div class="col-md-6 center-item">
                         <img src="images/product-1.png" alt="">
-                        <h5>iPhone 11 128GB Black</h5>
+                        <h6>iPhone 11 128GB Black</h6>
                      </div>
 
                      <div class="col-md-6 center-item">    
@@ -41,7 +41,7 @@
                   <div class="row">
                      <div class="col-md-6 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
-                        <h5>iPhone 11 Silicone Case - Black</h5>
+                        <h6>iPhone 11 Silicone Case - Black</h6>
                      </div>
                      <div class="col-md-6 center-item">
                         <div class="input-group -spinner">
@@ -118,13 +118,13 @@
         }
        //Re-setting...all value...
        function resetAll(){
-           mobileNumber.value = "1".toLocaleString('en-IN');
-           caseNumber.value = '1'.toLocaleString('en-IN');
-           mobileCost.innerHTML = '1219'.toLocaleString('en-IN');
-           caseCost.innerHTML = '59'.toLocaleString('en-IN');
-           subTotal.innerText = '1278'.toLocaleString('en-IN');
-           tax.innerText = '2'.toLocaleString('en-IN');
-           total.innerHTML = "1280".toLocaleString('en-IN');
+           mobileNumber.value = parseInt("1").toLocaleString('en-IN');
+           caseNumber.value = parseInt('1').toLocaleString('en-IN');
+           mobileCost.innerHTML = parseInt('1219').toLocaleString('en-IN');
+           caseCost.innerHTML = parseInt('59').toLocaleString('en-IN');
+           subTotal.innerText = parseInt('1278').toLocaleString('en-IN');
+           tax.innerText = parseInt('2').toLocaleString('en-IN');
+           total.innerHTML = parseInt("1280").toLocaleString('en-IN');
            Mobile.style.display = 'block';
            Case.style.display = 'block';
        }
@@ -139,7 +139,7 @@
                 let Sub_Total = parseInt(subTotal.innerText.replace(/[^0-9]/g, ''));
                 let Tax = parseInt(tax.innerText.replace(/[^0-9]/g, ''));
                 let Total = parseInt(total.innerText.replace(/[^0-9]/g, ''));
-                console.log(M,C,Sub_Total,Tax,Total);
+               //  console.log(M,C,Sub_Total,Tax,Total);
                 document.getElementById('m1').innerText = M.toLocaleString('en-IN');
                 document.getElementById('m2').innerText = C.toLocaleString('en-IN');
                 document.getElementById('m3').innerText = Sub_Total.toLocaleString('en-IN');
@@ -154,13 +154,19 @@
        //cross1...
        const crossMobile = document.getElementById('cross1');
        crossMobile.addEventListener('click', function(){
-        //checkAll();    
-        Mobile.style.display = 'none';
+        //checkAll();
+            updateInput(0,parseInt(caseNumber.value.replace(/[^0-9]/g, '')),false);
+            // console.log("mobile",parseInt(mobileNumber.value.replace(/[^0-9]/g, '')));  
+            // console.log("case",parseInt(caseNumber.value.replace(/[^0-9]/g, '')));
+            Mobile.style.display = 'none';
        });
        //cross2...
        const crossCase = document.getElementById('cross2');
        crossCase.addEventListener('click', function(){
-            //checkAll()    
+            //checkAll();
+            updateInput(parseInt(mobileNumber.value.replace(/[^0-9]/g, '')),0,false);  
+            // console.log("case",parseInt(caseNumber.value.replace(/[^0-9]/g, '')));
+            // console.log("mobile",parseInt(mobileNumber.value.replace(/[^0-9]/g, '')));  
             Case.style.display = 'none';
        });
        //minus1...button...
