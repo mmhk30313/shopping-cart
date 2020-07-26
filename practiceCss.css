@@ -2,18 +2,19 @@ body{
 	background: #fff;
 }
 .cart{
-	margin: 100px 0;
+	margin: 0 0;
 	background-color: #F6F5FA;;
-	padding: 60px 0;
-}
-.total-price{
-	padding-bottom: 15px;
+	padding: 55px 0;
+	/* height: 100%;
+	margin-bottom: 20px; */
+	/* padding-bottom: -50px; */
 }
 .cart-item{
 	background-color: #fff;
 	border-radius: 10px;
 	padding: 15px 20px;
-	margin-bottom: 20px;
+	/* padding-top: 20px; */
+	margin-bottom: 15px;
 }
 .center-item{
     display: flex;
@@ -86,12 +87,12 @@ body{
 	background-image: linear-gradient(to right,  rgb(196, 34, 101), rgb(106, 32, 218)) !important;
 	color: white !important;
 	box-shadow: 3px 3px 7px grey;
-	width: 500px;
-	height: 600px;
+	width: 450px;
+	height: 620px;
 	border-radius: 15px;
 	/* padding: 150px;*/
-	padding: 35px 40px;
-	margin-top: 50px;
+	padding: 35px 50px;
+	margin-top: 30px;
 	text-align: center;
 	/* display: none; */
 	/* transform: scale(1.05); */
@@ -110,6 +111,7 @@ body{
 	display: none;
 }
 #coupon{
-	width: 290px;
+	width: 270px;
 	height: 40px;
 }
+/* column dhik kora (Media Query Use korte hobe)*/
